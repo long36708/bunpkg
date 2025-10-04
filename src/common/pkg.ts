@@ -7,6 +7,7 @@ import { memoCache, sqliteCache } from "./cache";
 import { markError } from "./err";
 import { fetchPackageInfo, fetchPackageTarball } from "./fetch";
 import { getContentType, getIntegrityBy, tgzReader } from "./file";
+import { debounce } from "./debounce";
 import type { TarFileItem } from "nanotar";
 
 const helper = {
@@ -271,6 +272,9 @@ export const resolveTgz = async (
     return [file.data!, meta] as const;
   }
 };
+// 创建防抖版本的包信息查询函数
+const debouncedFetchPackageInfo = debounce(fetchPackageInfo, 300); // 300ms 防抖
+
 
 export const queryPkgInfo = async (packageName: string) => {
   const cacheKey = `pacakge-info${packageName}`;
@@ -279,7 +283,7 @@ export const queryPkgInfo = async (packageName: string) => {
     return cached;
   }
 
-  return fetchPackageInfo(packageName).then((info) => {
+  return debouncedFetchPackageInfo(packageName).then((info) => {
     // expire in 60s
     sqliteCache.write(cacheKey, info, Date.now() + 1000 * 60);
     return info;
