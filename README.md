@@ -286,3 +286,13 @@ bun run docs:build
 
 - [Elysia](https://elysiajs.com/)
 - [bun.sh](https://bun.sh/)
+
+### 配置优先级规则
+配置的优先级从高到低如下：
+1. **环境变量**：通过 `Bun.env` 读取的环境变量（如 `PORT`、`HOST` 等）。
+2. **自定义配置**：从 `./bunpkg.config` 导入的配置。
+3. **默认配置**：在 `src/common/constants.ts` 中定义的默认值。
+
+示例：
+- **端口号 (`PORT`)**：环境变量 > 自定义配置 > 默认值 (`4567`)。
+- **NPM 注册表 (`NPM_REGISTRY`)**：环境变量 > 自定义配置 > 默认值 (`https://registry.npmjs.org/`)。

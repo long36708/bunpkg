@@ -1,4 +1,5 @@
 import { defineConfig } from "vocs";
+import { DEFAULT_PORT } from "./src/common/constants";
 
 export default defineConfig({
   // baseUrl: "https://charlzyx.github.io/bunpkg/",
@@ -8,9 +9,9 @@ export default defineConfig({
   vite: {
     server: {
       proxy: {
-        "/meta": "http://localhost:4567",
-        "/npm": "http://localhost:4567",
-        "/esm": "http://localhost:4567",
+        "/meta": `http://localhost:${DEFAULT_PORT}`,
+        "/npm": `http://localhost:${DEFAULT_PORT}`,
+        "/esm": `http://localhost:${DEFAULT_PORT}`,
       },
     },
   },

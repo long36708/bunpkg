@@ -25,6 +25,7 @@ RUN bun install --production
 # case by DOCKER ENV
 RUN rm -rf .env
 
+# 默认端口号，与 src/common/constants.ts 中的 DEFAULT_PORT 保持一致
 ENV PORT 4567
 ENV HOST 0.0.0.0
 ENV CORS_ORIGIN *
@@ -41,4 +42,5 @@ VOLUME [ "/cache" ]
 # case by , this can be ctrl +c stop
 ENTRYPOINT ["./bunpkg.sh"] 
 
+# 暴露的端口号，与 src/common/constants.ts 中的 DEFAULT_PORT 保持一致
 EXPOSE 4567

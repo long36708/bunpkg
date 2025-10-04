@@ -6,6 +6,14 @@ const keepNumber = (x?: string) => {
 };
 
 import { BunPkgConfig as CustomConfig } from "./bunpkg.config";
+import {
+  DEFAULT_PORT,
+  DEFAULT_HOST,
+  DEFAULT_CACHE_DIR,
+  DEFAULT_CACHE_MAX_SIZE,
+  DEFAULT_NPM_REGISTRY,
+  DEFAULT_NPM_MAX_TGZ_SIZE
+} from "./common/constants";
 
 const env = {
   server: {
@@ -34,22 +42,22 @@ const env = {
 
 const defaults = {
   server: {
-    port: 4567,
+    port: DEFAULT_PORT,
     cors: {
       origin: true,
     },
-    // host: "0.0.0.0",
+    // host: DEFAULT_HOST,
   },
   cache: {
-    dir: "/cache",
-    maxSize: 4,
+    dir: DEFAULT_CACHE_DIR,
+    maxSize: DEFAULT_CACHE_MAX_SIZE,
   },
   esm: {
     origin: "",
   },
   npm: {
-    registry: "https://registry.npmjs.org/",
-    maxTgzSize: 100,
+    registry: DEFAULT_NPM_REGISTRY,
+    maxTgzSize: DEFAULT_NPM_MAX_TGZ_SIZE,
   },
   jwt: {
     secret: "",
